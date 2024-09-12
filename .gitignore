@@ -1,0 +1,5 @@
+*.yaml
+*.db
+*.json
+*.log
+__pycache__/

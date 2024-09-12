@@ -1,0 +1,24 @@
+# Copy or link this to /etc/systemd/system
+# Then:
+# - sudo systemctl daemon-reload
+# - sudo systemctl disable getty@tty1.service
+# - sudo systemctl enable planthealth.service
+# - reboot
+
+[Unit]
+Description=PlantHealth Access Point
+After=systemd-user-sessions.service plymouth-quit-wait.service getty-pre.target
+After=rc-local.service
+Conflicts=getty@tty1.service
+
+[Service]
+Type=simple
+StandardInput=tty
+StandardOutput=tty
+ExecStart=/srv/planthealth/startup_script.sh
+ExecStartPre=/bin/sleep 3
+ExecStopPost=/usr/sbin/reboot
+WorkingDirectory=/srv/planthealth
+
+[Install]
+WantedBy=getty.target

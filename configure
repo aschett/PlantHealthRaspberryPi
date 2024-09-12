@@ -1,0 +1,44 @@
+#!/bin/bash
+
+echo "Do you want to use HTTP or HTTPS connection? Type 1 for HTTP and 2 for HTTPS:"
+read connection_type
+
+if [ "$connection_type" = "1" ]; then
+    connection_type="http"
+elif [ "$connection_type" = "2" ]; then
+    connection_type="https"
+else
+    echo "Invalid input. Please enter either 1 for HTTP or 2 for HTTPS."
+    exit 1
+fi
+
+echo "Enter web_server_address: "
+read web_server_address
+
+#Add connection type to webserver adress
+web_server_address="${connection_type}://${web_server_address}"
+
+echo "Enter default_transmission_interval in seconds: "
+read default_transmission_interval
+
+# Check if default_transmission_interval is an integer
+if ! [[ "$default_transmission_interval" =~ ^[0-9]+$ ]]; then
+    echo "Error: default_transmission_interval must be an integer."
+    exit 1
+fi
+
+# Check if access_point_name is empty
+echo "Enter access_point_name: "
+read access_point_name
+
+if [ -z "$access_point_name" ]; then
+  echo "Access point name cannot be empty."
+  exit 1
+fi
+
+# Write configuration to conf.yaml
+echo "web_server_address: $web_server_address" > conf.yaml
+echo "default_transmission_interval: $default_transmission_interval" >> conf.yaml
+echo "access_point_name: $access_point_name" >> conf.yaml
+
+echo "Configuration complete!"
