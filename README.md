@@ -10,7 +10,7 @@
 
 ## 1. Install all dependencies
 
-This includes updating BlueZ to v5.66 -- see [this page](https://lms.uibk.ac.at/auth/RepositoryEntry/5380538521/CourseNode/107744866999913) on OpenOLAT for a step-by-step guide.
+This includes updating BlueZ to v5.66
 
 ## 2. Configure web server address and Access Point name
 
